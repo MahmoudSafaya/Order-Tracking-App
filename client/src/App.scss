@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root{
+  --white: #FFFFFF;
+  --black: #000000;
+  --main-black: #242424;
+  --main-yellow: #F9BD24;
+
+  --btn-bg: #1a1a1a;
+  
+  --main-yellow-light: #FFD600;
+  --secondary-color: #f4f4f4;
+  --secondary-color-dark: #e6e6e6;
+
+  --sidebar-width: 250px;
+}
+
+body{
+  min-height: 100vh;
+  background-color: var(--secondary-color);
+}
+
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+}
+
+a{
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.requird-tag {
+  color: #F53741;
+  margin-right: 5px;
+}
+
+.app-content,
+header {
+  width: calc(100vw - var(--sidebar-width));
+  margin-left: var(--sidebar-width);
+}
+
+.app-content {
+  padding: 40px;
+}
+
+header {
+  padding: 30px 40px;
+  background-color: var(--white);
+  color: var(--main-yellow);
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  .user-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--main-black);
+  color: var(--white);
+  padding: 20px;
+  min-height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  ul.sidebar-list {
+    list-style: none;
+    margin: 40px 0px;
+    li{
+      font-size: 18px;
+      margin: 20px 0px;
+      a {
+        color: white;
+        &:focus,
+        &:hover {
+          color: var(--main-yellow);
+        }
+      }
+    }
+  }
+
+  .logout-box {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: var(--sidebar-width);
+    button{
+      width: 100%;
+      padding: 15px 0px;
+      background-color: var(--btn-bg);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      outline: none;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}
