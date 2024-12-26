@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setAuth(null);
     Cookies.remove("user");
+    Cookies.remove("token");
     sessionStorage.removeItem("user");
   };
 
@@ -78,28 +79,6 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error deleting item:", error);
-    }
-  };
-
-  const updateOrder = async (id, newData) => {
-    try {
-      const response = await axios.put(`/api/order/update/${id}`, {
-        newData,
-      });
-
-      if (response.ok) {
-        setOrders((prevItems) =>
-          prevItems.map((item) =>
-            item._id === id ? { ...item, name: updatedName } : item
-          )
-        );
-        alert(data.message);
-        // setEditItem(null); // Exit edit mode
-      } else {
-        alert(data.error || data.message);
-      }
-    } catch (error) {
-      console.error("Error updating item:", error);
     }
   };
 

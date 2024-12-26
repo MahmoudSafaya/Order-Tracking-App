@@ -8,10 +8,10 @@ import "../styles/NewOrder.scss";
 import axios from '../api/axios';
 import { useAuth } from "../context/AuthContext";
 
-const NewOrder = () => {
-  const { auth } = useAuth();
+const NewOrder = ({ editMode, info, handleOrderPopup }) => {
+  const { auth, orders, setOrders } = useAuth();
 
-  const initialValues = {
+  const initialValues = info || {
     sender: {
       name: "Knoz",
       phone1: "01551448276",
@@ -35,17 +35,39 @@ const NewOrder = () => {
   };
 
   const handleSubmit = async (values, actions) => {
+    console.log(orders)
     console.log("Form Data:", values);
     const {sender, receiver, product, signedBy} = values;
+    if(editMode) {
+      try {
+        const response = await axios.put(`/api/order/update/${info._id}`, {
+          barcodeID: info.barcodeID,
+          sender,
+          receiver,
+          product,
+          signedBy
+        });
+        setOrders(orders.map(item => (
+          item._id === info._id ? values : item
+        )))
+        handleOrderPopup({editing: false})
+        console.log('updat: ' + response)
+      } catch (error) {
+        console.error(error)
+      }
+    } else {
       try {
         const response = await axios.post('/api/order/add-order', {
           sender, receiver, product, signedBy
         });
         console.log(response);
         actions.resetForm();
+        
       } catch (error) {
         console.log(error)
       }
+    }
+
   };
 
   return (
@@ -72,7 +94,7 @@ const NewOrder = () => {
           </div>
 
           <button type="submit" className="new-order-btn">
-            Order
+            {editMode ? 'Update' : 'Order'}
           </button>
         </Form>
       )}

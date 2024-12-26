@@ -74,9 +74,9 @@ const updateOrder = async (req, res) => {
       );
 
       if (result.matchedCount === 1) {
-          res.status(200).send({ message: "Item updated successfully" });
+          res.status(200).json({ message: "Item updated successfully" });
       } else {
-          res.status(404).send({ message: "Item not found" });
+          res.status(404).json({ message: "Item not found" });
       }
   } catch (error) {
       res.status(500).send({ error: error.message });
@@ -97,4 +97,4 @@ const fetchOrdersWithStoreDetails = async () => {
 }
 
 
-module.exports = { getOrders, addOrder, fetchOrdersByStore, fetchOrdersWithStoreDetails, deleteOrder };
+module.exports = { getOrders, addOrder, fetchOrdersByStore, fetchOrdersWithStoreDetails, deleteOrder, updateOrder };
